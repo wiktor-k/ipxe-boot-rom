@@ -1,15 +1,12 @@
-BASEURL=http://ipxe.example.com
+#BASEURL will be provided via environment variable
+#BASEURL=http://ipxe.example.com
 # ============================================================================
 # Desired end results:
 #
 # See http://etherboot.org/wiki/romburning/vbox
-# Default for Most Guest VM OS Choices
-all:: 10222000.rom 
-# Intel PRO/1000 MT Desktop (82540EM) Default for Windows Vista/Windows 7 VMs
-all:: 8086100e.rom 
 
 # The full featured 'second stage' version that doesn't fit into the ROM
-all:: menuloader.pxe
+all:: loader.pxe
 
 # ============================================================================
 
@@ -72,7 +69,7 @@ clean::
 clean::
 	rm -f *.rom *.iso
 
-menuloader.pxe: script-full.ipxe ipxe-full Makefile ipxe-full/src/config/local/general.h ipxe-full/src/config/local/console.h
+loader.pxe: script-full.ipxe ipxe-full Makefile ipxe-full/src/config/local/general.h ipxe-full/src/config/local/console.h
 	@echo Building $@
 	@( \
 	  cd ipxe-full/src ;\
@@ -81,4 +78,4 @@ menuloader.pxe: script-full.ipxe ipxe-full Makefile ipxe-full/src/config/local/g
 	)
 
 clean::
-	rm -f menuloader.pxe
+	rm -f loader.pxe
